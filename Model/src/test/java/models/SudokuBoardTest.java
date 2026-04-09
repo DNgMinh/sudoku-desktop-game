@@ -258,4 +258,16 @@ public class SudokuBoardTest {
         assertFalse(sudokuBoard.equals(clonedBoard));
         assertNotEquals(sudokuBoard.hashCode(), clonedBoard.hashCode());
     }
+
+    @Test
+    void testCheckEndGameAfterSolvingBoard() {
+        SudokuBoard sudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver());
+        try {
+            sudokuBoard.solveGame();
+        } catch (FillingBoardSudokuException e) {
+            fail("solveGame() should not throw exception for a valid board");
+        }
+
+        assertTrue(sudokuBoard.checkEndGame());
+    }
 }
